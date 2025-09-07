@@ -1,3 +1,5 @@
+
+// Korean-German word pairs
 const wordPairs = [
                 { korean: 'test1', german: 'test' },
                 { korean: 'test2', german: 'test' },

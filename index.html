@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>한글-독일어 단어 게임</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Koreanisch-Deutsch Wortspiel</title>
 
-    <link rel="stylesheet" href="./style.css">
-    
-</head>
-<body>
-    <div class="container">
-        <h1>한글-독일어 단어 게임</h1>
+        <link rel="stylesheet" href="./style.css">
         
-        <div class="instructions">
-            <p>• 한글 단어를 입력하면 해당 카드가 뒤집히며 독일어 단어가 나타납니다.</p>
-            <p>• 정확한 단어를 입력하면 카드가 회색으로 변합니다.</p>
-            <p>• 모든 단어를 맞히면 게임 클리어!</p>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Koreanisch-Deutsch Wortspiel</h1>
+            
+            <div class="instructions">
+                <p>• Wenn Sie ein koreanisches Wort eingeben, dreht sich die entsprechende Karte um und zeigt das deutsche Wort.</p>
+                <p>• Wenn Sie das richtige Wort eingeben, wird die Karte grau.</p>
+                <p>• Wenn Sie alle Wörter richtig erraten, ist das Spiel beendet!</p>
+            </div>
+            
+            <div class="game-info">
+                <div>Übrige Wörter: <span id="remaining-words">36</span></div>
+                <div>Geratene Wörter: <span id="completed-words">0</span></div>
+            </div>
+            
+            <div class="input-area">
+                <input type="text" id="word-input" placeholder="Geben Sie das koreanische Wort ein." autofocus>
+            </div>
+            
+            <div class="words-grid" id="words-grid"></div>
+            
+            <div id="message"></div>
+            
+            <div class="controls">
+                <button id="reset-btn">Spiel neustarten</button>
+            </div>
         </div>
-        
-        <div class="game-info">
-            <div>남은 단어: <span id="remaining-words">36</span></div>
-            <div>맞힌 단어: <span id="completed-words">0</span></div>
-        </div>
-        
-        <div class="input-area">
-            <input type="text" id="word-input" placeholder="한글 단어를 입력하세요" autofocus>
-        </div>
-        
-        <div class="words-grid" id="words-grid"></div>
-        
-        <div id="message"></div>
-        
-        <div class="controls">
-            <button id="reset-btn">게임 재시작</button>
-        </div>
-    </div>
 
-    <script type="module" src="./script.js"></script>
-</body>
+        <script type="module" src="./script.js"></script>
+        
+    </body>
 </html>
