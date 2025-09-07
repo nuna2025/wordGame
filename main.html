@@ -293,54 +293,57 @@
                 remainingWordsEl.textContent = remainingWords;
                 completedWordsEl.textContent = completedWords;
             }
-            
+
             // 입력 이벤트 처리
-            wordInput.addEventListener('input', function() {
-                const inputText = this.value.trim();
-                
-                if (inputText === '') return;
-                
-                const cards = document.querySelectorAll('.word-card');
-                let found = false;
-                
-                cards.forEach(card => {
-                    if (!card.classList.contains('completed') && 
-                        card.dataset.korean === inputText) {
-                        
-                        found = true;
-                        card.classList.add('flipped');
-                        
-                        // 잠시 후에 완료 상태로 표시
-                        setTimeout(() => {
-                            card.classList.add('completed');
-                            completedWords++;
-                            remainingWords--;
-                            updateWordCount();
-                            
-                            // 게임 클리어 체크
-                            if (completedWords === 36) {
-                                messageEl.textContent = '축하합니다! 모든 단어를 맞히셨습니다!';
-                                messageEl.className = 'success';
-                            }
-                        }, 600);
-                        
-                        this.value = '';
-                        messageEl.textContent = '정답입니다!';
-                        messageEl.className = 'success';
-                    }
-                });
-                
-                if (!found && inputText !== '') {
-                    messageEl.textContent = '일치하는 단어가 없습니다. 다시 시도해주세요.';
-                    messageEl.className = 'error';
+            wordInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();              // 기본 동작(폼 제출, 스페이스 스크롤 등) 방지
+                    const inputText = this.value.trim();
                     
-                    // 에러 메시지 일정 시간 후 사라지게
-                    setTimeout(() => {
-                        messageEl.textContent = '';
-                        messageEl.className = '';
-                    }, 1500);
+                    if (inputText === '') return;
+
+                    const cards = document.querySelectorAll('.word-card');
+                    let found = false;
+
+                    cards.forEach(card => {
+                        if (!card.classList.contains('completed') && 
+                            card.dataset.korean === inputText) {
+                            
+                            found = true;
+                            card.classList.add('flipped');
+                            
+                            setTimeout(() => {
+                                card.classList.add('completed');
+                                completedWords++;
+                                remainingWords--;
+                                updateWordCount();
+                                
+                                if (completedWords === 36) {
+                                    messageEl.textContent = '축하합니다! 모든 단어를 맞히셨습니다!';
+                                    messageEl.className = 'success';
+                                }
+                            }, 600);
+
+                            messageEl.textContent = '정답입니다!';
+                            messageEl.className = 'success';
+                        }
+                    });
+
+                    if (!found) {
+                        messageEl.textContent = '일치하는 단어가 없습니다. 다시 시도해주세요.';
+                        messageEl.className = 'error';
+                        
+                        setTimeout(() => {
+                            messageEl.textContent = '';
+                            messageEl.className = '';
+                        }, 1500);
+                    }
+
+                    // 정답/오답 관계없이 입력란은 비우기
+                    this.value = '';
                 }
             });
+
             
             // 카드 클릭 이벤트 (모바일 대응)
             wordsGrid.addEventListener('click', function(e) {
